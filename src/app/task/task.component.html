@@ -1,0 +1,15 @@
+<td>
+    <div class="custom-control custom-checkbox">
+        <input 
+        type="checkbox" 
+        class="custom-control-input" 
+        [id]="'customCheck-'+task.id" [checked]="task.status" 
+        (change)="checkValue($event)" 
+        [disabled]="task.status">
+        <label class="custom-control-label" [for]="'customCheck-'+task.id"></label>
+    </div>
+</td>
+<td>{{task.name}}</td>
+<td>{{task.deadline | customDatePipe}}</td>
+<td>{{task.finished | customDatePipe}}</td>
+<td><button class="btn btn-danger" (click)="deleteTask()"><i class="bi bi-trash"></i></button></td>

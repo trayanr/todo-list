@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h4 class="modal-title">Create New Task</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+        <div class="form-group row">
+          <label for="name" class="col-sm-4 col-form-label">Name</label>
+          <div class="col-sm-8">
+            <input 
+            type="text" 
+            class="form-control" 
+            id="name" 
+            formControlName="name" 
+            [ngClass]="{'is-invalid': this.name!.invalid, 'is-valid':this.name!.valid}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="description" class="col-sm-4 col-form-label">Description</label>
+          <div class="col-sm-8">
+            <input 
+            type="text" 
+            class="form-control" 
+            id="description" 
+            formControlName="description"
+            [ngClass]="{'is-invalid': this.description!.invalid, 'is-valid':this.description!.valid}">
+            <div class="invalid-feedback" *ngIf="this.description!.invalid">
+              Description must be atleast 10 characters long.
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <label for="description" class="col-sm-4 col-form-label">Deadline Date</label>
+          <div class="col-sm-8 input-group">
+            <input 
+            type="text" 
+            ngbDatepicker 
+            formControlName="date" 
+            #d="ngbDatepicker"
+            class="form-control"
+            [ngClass]="{'is-invalid': this.date!.invalid, 'is-valid':this.date!.valid}"
+            readonly
+            />
+            <button (click)="d.toggle()" class="btn btn-primary input-group-append"><i class="bi bi-calendar"></i></button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="description" class="col-sm-4 col-form-label">Deadline Time</label>
+          <div class="col-sm-6">
+            <ngb-timepicker 
+            formControlName="time" 
+            [spinners]="false"
+            ></ngb-timepicker>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-outline-success" *ngIf="this.time!.valid"><i class="bi bi-check"></i></button>
+            <button class="btn btn-outline-danger" *ngIf="this.time!.invalid"><i class="bi bi-x"></i></button>
+          </div>
+        </div> 
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveTask()" [disabled]="this.form.invalid">Create</button>
+  </div>
